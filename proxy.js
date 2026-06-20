@@ -1,4 +1,6 @@
-export default async function handler(req, res) {
+const https = require("https");
+
+module.exports = async (req, res) => {
   res.setHeader("Access-Control-Allow-Origin", "*");
   res.setHeader("Access-Control-Allow-Methods", "POST, OPTIONS");
   res.setHeader("Access-Control-Allow-Headers", "Content-Type");
@@ -7,20 +9,35 @@ export default async function handler(req, res) {
   if (req.method !== "POST") return res.status(405).json({ error: "Method not allowed" });
 
   try {
-    const response = await fetch(
-      "https://agent-prod.studio.lyzr.ai/v3/inference/chat/",
-      {
-        method: "POST",
-        headers: {
-          "Content-Type": "application/json",
-          "x-api-key": "sk-default-pZcInjl3DZStUYXX9fTMODoDFHeZ9Zpk",
-        },
-        body: JSON.stringify(req.body),
+    const body = JSON.stringify(req.body);
+    const options = {
+      hostname: "agent-prod.studio.lyzr.ai",
+      path: "/v3/inference/chat/",
+      method: "POST",
+      headers: {
+        "Content-Type": "application/json",
+        "Content-Length": Buffer.byteLength(body),
+        "x-api-key": "sk-default-pZcInjl3DZStUYXX9fTMODoDFHeZ9Zpk"
       }
-    );
-    const data = await response.json();
-    return res.status(response.status).json(data);
+    };
+
+    const data = await new Promise((resolve, reject) => {
+      const proxyReq = https.request(options, (proxyRes) => {
+        let raw = "";
+        proxyRes.on("data", chunk => raw += chunk);
+        proxyRes.on("end", () => {
+          try { resolve({ status: proxyRes.statusCode, body: JSON.parse(raw) }); }
+          catch(e) { resolve({ status: proxyRes.statusCode, body: { response: raw } }); }
+        });
+      });
+      proxyReq.on("error", reject);
+      proxyReq.setTimeout(240000, () => reject(new Error("Upstream timeout")));
+      proxyReq.write(body);
+      proxyReq.end();
+    });
+
+    return res.status(data.status).json(data.body);
   } catch (error) {
     return res.status(500).json({ error: error.message });
   }
-}
+};
