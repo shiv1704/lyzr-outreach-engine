@@ -2,5 +2,5 @@
   "name": "lyzr-outreach-engine",
   "version": "1.0.0",
   "description": "Lyzr Enterprise Outreach Engine",
-  "engines": { "node": "18.x" }
+  "engines": { "node": "22.x" }
 }
