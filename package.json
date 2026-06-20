@@ -1,6 +1,9 @@
 {
   "name": "lyzr-outreach-engine",
   "version": "1.0.0",
-  "description": "Lyzr Enterprise Outreach Engine",
+  "main": "server.js",
+  "scripts": {
+    "start": "node server.js"
+  },
   "engines": { "node": "22.x" }
 }
