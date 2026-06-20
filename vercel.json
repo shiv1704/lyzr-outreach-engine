@@ -1,14 +1,13 @@
 {
   "version": 2,
-  "routes": [
-    {
-      "src": "/api/proxy",
-      "dest": "/proxy.js",
-      "methods": ["GET", "POST", "OPTIONS"]
-    },
-    {
-      "src": "/(.*)",
-      "dest": "/index.html"
+  "functions": {
+    "proxy.js": {
+      "runtime": "nodejs22.x",
+      "maxDuration": 360
     }
+  },
+  "routes": [
+    { "src": "/api/proxy", "dest": "/proxy.js" },
+    { "src": "/(.*)", "dest": "/index.html" }
   ]
 }
