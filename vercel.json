@@ -1,18 +1,18 @@
 {
   "version": 2,
   "functions": {
-    "api/proxy.js": {
+    "proxy.js": {
       "runtime": "@vercel/node"
     }
   },
   "routes": [
     {
       "src": "/api/proxy",
-      "dest": "/api/proxy.js"
+      "dest": "/proxy.js"
     },
     {
       "src": "/(.*)",
-      "dest": "/public/$1"
+      "dest": "/index.html"
     }
   ]
 }
