@@ -1,25 +1,27 @@
 export const config = { runtime: "edge" };
 
 export default async function handler(req) {
-  const corsHeaders = {
+  const cors = {
     "Access-Control-Allow-Origin": "*",
-    "Access-Control-Allow-Methods": "POST, OPTIONS",
-    "Access-Control-Allow-Headers": "Content-Type",
+    "Access-Control-Allow-Methods": "GET, POST, OPTIONS",
+    "Access-Control-Allow-Headers": "Content-Type, x-api-key",
+    "Content-Type": "application/json",
   };
 
   if (req.method === "OPTIONS") {
-    return new Response(null, { status: 200, headers: corsHeaders });
+    return new Response(null, { status: 204, headers: cors });
   }
 
-  if (req.method !== "POST") {
-    return new Response(JSON.stringify({ error: "Method not allowed" }), {
-      status: 405, headers: { ...corsHeaders, "Content-Type": "application/json" }
+  let body;
+  try {
+    body = await req.json();
+  } catch (e) {
+    return new Response(JSON.stringify({ error: "Invalid JSON body" }), {
+      status: 400, headers: cors
     });
   }
 
   try {
-    const body = await req.text();
-
     const upstream = await fetch(
       "https://agent-prod.studio.lyzr.ai/v3/inference/chat/",
       {
@@ -28,23 +30,20 @@ export default async function handler(req) {
           "Content-Type": "application/json",
           "x-api-key": "sk-default-pZcInjl3DZStUYXX9fTMODoDFHeZ9Zpk",
         },
-        body: body,
+        body: JSON.stringify(body),
       }
     );
 
-    const data = await upstream.text();
+    const text = await upstream.text();
 
-    return new Response(data, {
+    return new Response(text, {
       status: upstream.status,
-      headers: {
-        ...corsHeaders,
-        "Content-Type": "application/json",
-      },
+      headers: cors,
     });
+
   } catch (error) {
     return new Response(JSON.stringify({ error: error.message }), {
-      status: 500,
-      headers: { ...corsHeaders, "Content-Type": "application/json" }
+      status: 500, headers: cors
     });
   }
 }
