@@ -5,24 +5,35 @@ const path = require("path");
 
 const PORT = process.env.PORT || 3000;
 
-const MIME = {
-  ".html": "text/html",
-  ".css": "text/css",
-  ".js": "application/javascript",
-  ".json": "application/json",
-  ".png": "image/png",
-  ".ico": "image/x-icon"
-};
-
 const server = http.createServer((req, res) => {
+
   const cors = {
     "Access-Control-Allow-Origin": "*",
-    "Access-Control-Allow-Methods": "POST, OPTIONS",
+    "Access-Control-Allow-Methods": "POST, OPTIONS, GET",
     "Access-Control-Allow-Headers": "Content-Type"
   };
 
-  // PROXY ROUTE
-  if (req.url === "/api/proxy" && req.method === "POST") {
+  function setCors() {
+    Object.entries(cors).forEach(([k, v]) => res.setHeader(k, v));
+  }
+
+  // CORS PREFLIGHT
+  if (req.method === "OPTIONS") {
+    setCors();
+    res.writeHead(204);
+    res.end();
+    return;
+  }
+
+  // PROXY ROUTE — match any URL containing /api/proxy
+  if (req.url.includes("/api/proxy")) {
+    if (req.method !== "POST") {
+      setCors();
+      res.writeHead(405, { "Content-Type": "application/json" });
+      res.end(JSON.stringify({ error: "Method not allowed, use POST" }));
+      return;
+    }
+
     let body = "";
     req.on("data", chunk => body += chunk);
     req.on("end", () => {
@@ -41,7 +52,7 @@ const server = http.createServer((req, res) => {
         let data = "";
         proxyRes.on("data", chunk => data += chunk);
         proxyRes.on("end", () => {
-          Object.entries(cors).forEach(([k, v]) => res.setHeader(k, v));
+          setCors();
           res.setHeader("Content-Type", "application/json");
           res.writeHead(proxyRes.statusCode);
           res.end(data);
@@ -49,9 +60,16 @@ const server = http.createServer((req, res) => {
       });
 
       proxyReq.on("error", (err) => {
-        Object.entries(cors).forEach(([k, v]) => res.setHeader(k, v));
+        setCors();
         res.writeHead(500, { "Content-Type": "application/json" });
         res.end(JSON.stringify({ error: err.message }));
+      });
+
+      proxyReq.setTimeout(360000, () => {
+        proxyReq.destroy();
+        setCors();
+        res.writeHead(504, { "Content-Type": "application/json" });
+        res.end(JSON.stringify({ error: "Lyzr agent timed out after 6 minutes" }));
       });
 
       proxyReq.write(body);
@@ -60,31 +78,24 @@ const server = http.createServer((req, res) => {
     return;
   }
 
-  // CORS PREFLIGHT
-  if (req.method === "OPTIONS") {
-    Object.entries(cors).forEach(([k, v]) => res.setHeader(k, v));
-    res.writeHead(204);
-    res.end();
-    return;
-  }
-
-  // SERVE STATIC FILES
-  let filePath = req.url === "/" ? "/index.html" : req.url;
-  filePath = path.join(__dirname, filePath);
-
-  fs.readFile(filePath, (err, content) => {
+  // SERVE index.html for everything else
+  const indexPath = path.join(__dirname, "index.html");
+  fs.readFile(indexPath, (err, content) => {
     if (err) {
-      fs.readFile(path.join(__dirname, "index.html"), (e, c) => {
-        res.writeHead(200, { "Content-Type": "text/html" });
-        res.end(c);
-      });
+      res.writeHead(500);
+      res.end("Could not load index.html");
       return;
     }
-    const ext = path.extname(filePath);
-    res.writeHead(200, { "Content-Type": MIME[ext] || "text/plain" });
+    res.writeHead(200, { "Content-Type": "text/html" });
     res.end(content);
   });
+
 });
 
 server.timeout = 400000;
-server.listen(PORT, () => console.log("Server running on port " + PORT));
+server.keepAliveTimeout = 400000;
+server.headersTimeout = 401000;
+
+server.listen(PORT, () => {
+  console.log("Lyzr Outreach Engine running on port " + PORT);
+});
