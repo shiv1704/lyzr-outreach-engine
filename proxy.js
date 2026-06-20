@@ -1,49 +1,46 @@
-export const config = { runtime: "edge" };
-
-export default async function handler(req) {
-  const cors = {
-    "Access-Control-Allow-Origin": "*",
-    "Access-Control-Allow-Methods": "GET, POST, OPTIONS",
-    "Access-Control-Allow-Headers": "Content-Type, x-api-key",
-    "Content-Type": "application/json",
-  };
+module.exports = async (req, res) => {
+  res.setHeader("Access-Control-Allow-Origin", "*");
+  res.setHeader("Access-Control-Allow-Methods", "POST, OPTIONS");
+  res.setHeader("Access-Control-Allow-Headers", "Content-Type");
 
   if (req.method === "OPTIONS") {
-    return new Response(null, { status: 204, headers: cors });
+    return res.status(204).end();
   }
 
-  let body;
-  try {
-    body = await req.json();
-  } catch (e) {
-    return new Response(JSON.stringify({ error: "Invalid JSON body" }), {
-      status: 400, headers: cors
-    });
-  }
+  const https = require("https");
+  const body = JSON.stringify(req.body);
+
+  const options = {
+    hostname: "agent-prod.studio.lyzr.ai",
+    path: "/v3/inference/chat/",
+    method: "POST",
+    headers: {
+      "Content-Type": "application/json",
+      "Content-Length": Buffer.byteLength(body),
+      "x-api-key": "sk-default-pZcInjl3DZStUYXX9fTMODoDFHeZ9Zpk"
+    }
+  };
 
   try {
-    const upstream = await fetch(
-      "https://agent-prod.studio.lyzr.ai/v3/inference/chat/",
-      {
-        method: "POST",
-        headers: {
-          "Content-Type": "application/json",
-          "x-api-key": "sk-default-pZcInjl3DZStUYXX9fTMODoDFHeZ9Zpk",
-        },
-        body: JSON.stringify(body),
-      }
-    );
-
-    const text = await upstream.text();
-
-    return new Response(text, {
-      status: upstream.status,
-      headers: cors,
+    const data = await new Promise((resolve, reject) => {
+      const proxyReq = https.request(options, (proxyRes) => {
+        let raw = "";
+        proxyRes.on("data", chunk => raw += chunk);
+        proxyRes.on("end", () => {
+          try {
+            resolve({ status: proxyRes.statusCode, body: JSON.parse(raw) });
+          } catch (e) {
+            resolve({ status: proxyRes.statusCode, body: { response: raw } });
+          }
+        });
+      });
+      proxyReq.on("error", reject);
+      proxyReq.write(body);
+      proxyReq.end();
     });
 
+    return res.status(data.status).json(data.body);
   } catch (error) {
-    return new Response(JSON.stringify({ error: error.message }), {
-      status: 500, headers: cors
-    });
+    return res.status(500).json({ error: error.message });
   }
-}
+};
