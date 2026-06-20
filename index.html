@@ -9,15 +9,12 @@
 *{margin:0;padding:0;box-sizing:border-box;}
 :root{
   --navy:#0D0D1A;--navy2:#1A1A2E;--card:#16213E;
-  --border:#2A2A4A;--border-hover:#4F8EF7;
-  --blue:#4F8EF7;--blue-h:#3A7AE8;--blue-glow:rgba(79,142,247,0.15);
+  --border:#2A2A4A;--blue:#4F8EF7;--blue-h:#3A7AE8;
+  --blue-glow:rgba(79,142,247,0.15);
   --text:#FFFFFF;--text2:#8892B0;--text3:#4A5568;--textA:#CCDDFF;
-  --green:#10B981;--yellow:#F59E0B;--red:#EF4444;
-  --font:'Inter',sans-serif;
+  --green:#10B981;--red:#EF4444;--font:'Inter',sans-serif;
 }
 body{background:var(--navy);color:var(--text);font-family:var(--font);min-height:100vh;}
-
-/* NAV */
 nav{position:fixed;top:0;left:0;right:0;z-index:100;background:rgba(13,13,26,0.95);
   backdrop-filter:blur(12px);border-bottom:1px solid var(--border);
   padding:0 2rem;height:60px;display:flex;align-items:center;justify-content:space-between;}
@@ -31,24 +28,20 @@ nav{position:fixed;top:0;left:0;right:0;z-index:100;background:rgba(13,13,26,0.9
 .nav-cta{background:var(--blue);border:none;color:#fff;font-size:14px;font-weight:500;
   cursor:pointer;font-family:var(--font);padding:8px 16px;border-radius:8px;transition:all 0.2s;}
 .nav-cta:hover{background:var(--blue-h);}
-
-/* VIEWS */
 .view{display:none;padding-top:60px;}
 .view.active{display:block;}
 
 /* LANDING */
 .hero{min-height:calc(100vh - 60px);display:flex;flex-direction:column;
-  align-items:center;justify-content:center;text-align:center;padding:2rem;
-  position:relative;overflow:hidden;}
+  align-items:center;justify-content:center;text-align:center;padding:2rem;position:relative;overflow:hidden;}
 .orb{position:absolute;width:600px;height:600px;border-radius:50%;
   background:radial-gradient(circle,rgba(79,142,247,0.12) 0%,rgba(83,74,183,0.06) 50%,transparent 70%);
-  animation:spin 20s linear infinite;pointer-events:none;}
-@keyframes spin{from{transform:rotate(0deg) translateX(100px);}to{transform:rotate(360deg) translateX(100px);}}
+  animation:orbspin 20s linear infinite;pointer-events:none;}
+@keyframes orbspin{from{transform:rotate(0deg) translateX(100px);}to{transform:rotate(360deg) translateX(100px);}}
 .badge{display:inline-flex;align-items:center;gap:6px;background:rgba(79,142,247,0.12);
   border:1px solid rgba(79,142,247,0.3);color:var(--blue);font-size:12px;font-weight:500;
   padding:6px 14px;border-radius:20px;margin-bottom:1.5rem;}
-.hero h1{font-size:clamp(2.5rem,6vw,4.5rem);font-weight:700;line-height:1.1;
-  margin-bottom:1.5rem;max-width:800px;}
+.hero h1{font-size:clamp(2.5rem,6vw,4.5rem);font-weight:700;line-height:1.1;margin-bottom:1.5rem;max-width:800px;}
 .hero h1 span{color:var(--blue);}
 .hero p{font-size:1.1rem;color:var(--text2);max-width:560px;line-height:1.7;margin-bottom:2.5rem;}
 .hero-btns{display:flex;gap:1rem;flex-wrap:wrap;justify-content:center;margin-bottom:1.5rem;}
@@ -60,14 +53,12 @@ nav{position:fixed;top:0;left:0;right:0;z-index:100;background:rgba(13,13,26,0.9
   font-family:var(--font);transition:all 0.2s;}
 .btn-secondary:hover{border-color:var(--blue);color:var(--blue);}
 .powered{font-size:12px;color:var(--text3);}
-
-/* PIPELINE CARDS */
 .pipeline-section{padding:5rem 2rem;max-width:1100px;margin:0 auto;}
 .pipeline-section h2{text-align:center;font-size:2rem;font-weight:700;margin-bottom:0.75rem;}
 .pipeline-section .sub{text-align:center;color:var(--text2);margin-bottom:3rem;font-size:1rem;}
 .cards-grid{display:grid;grid-template-columns:repeat(auto-fit,minmax(280px,1fr));gap:1.5rem;}
 .pipeline-card{background:var(--card);border:1px solid var(--border);border-radius:16px;
-  padding:2rem;transition:all 0.3s;position:relative;overflow:hidden;}
+  padding:2rem;transition:all 0.3s;}
 .pipeline-card:hover{border-color:var(--blue);box-shadow:0 0 24px var(--blue-glow);}
 .card-num{font-size:11px;font-weight:700;color:var(--blue);letter-spacing:2px;margin-bottom:1rem;}
 .card-icon{width:44px;height:44px;background:rgba(79,142,247,0.1);border-radius:10px;
@@ -77,179 +68,127 @@ nav{position:fixed;top:0;left:0;right:0;z-index:100;background:rgba(13,13,26,0.9
 .pipeline-card p{color:var(--text2);font-size:0.9rem;line-height:1.6;margin-bottom:1rem;}
 .card-tag{display:inline-block;background:rgba(79,142,247,0.1);color:var(--blue);
   font-size:11px;padding:3px 10px;border-radius:20px;font-weight:500;}
-
-/* WHY SECTION */
-.why-section{padding:4rem 2rem;max-width:900px;margin:0 auto;}
-.why-section h2{text-align:center;font-size:1.75rem;font-weight:700;margin-bottom:2.5rem;}
-.why-grid{display:grid;grid-template-columns:repeat(auto-fit,minmax(200px,1fr));gap:1rem;}
-.why-card{background:var(--card);border:1px solid var(--border);border-radius:12px;padding:1.5rem;}
-.why-card .num{font-size:1.75rem;font-weight:700;color:var(--blue);margin-bottom:0.5rem;}
-.why-card p{color:var(--text2);font-size:0.85rem;line-height:1.5;}
-
-/* FOOTER */
 footer{border-top:1px solid var(--border);padding:1.5rem 2rem;
   display:flex;justify-content:space-between;align-items:center;flex-wrap:wrap;gap:1rem;}
 footer span{font-size:12px;color:var(--text3);}
 
 /* CONSOLE */
 .console-wrap{max-width:1200px;margin:0 auto;padding:2rem;
-  display:grid;grid-template-columns:420px 1fr;gap:1.5rem;min-height:calc(100vh - 60px);}
+  display:grid;grid-template-columns:400px 1fr;gap:1.5rem;min-height:calc(100vh - 60px);}
 @media(max-width:900px){.console-wrap{grid-template-columns:1fr;}}
-
-/* INPUT PANEL */
 .input-panel{background:var(--card);border:1px solid var(--border);border-radius:16px;
   padding:1.5rem;height:fit-content;position:sticky;top:80px;}
 .panel-title{font-size:1.1rem;font-weight:600;margin-bottom:4px;}
 .panel-sub{font-size:12px;color:var(--text2);margin-bottom:1.5rem;}
 .field{margin-bottom:1rem;}
-.field label{display:block;font-size:12px;font-weight:500;color:var(--textA);
-  margin-bottom:6px;letter-spacing:0.3px;}
+.field label{display:block;font-size:12px;font-weight:500;color:var(--textA);margin-bottom:6px;}
 .field label .req{color:var(--red);}
 .field input,.field textarea{width:100%;background:rgba(255,255,255,0.04);
   border:1px solid var(--border);border-radius:8px;padding:10px 12px;
   color:var(--text);font-size:13px;font-family:var(--font);transition:all 0.2s;resize:none;}
-.field input:focus,.field textarea:focus{outline:none;border-color:var(--blue);
-  background:rgba(79,142,247,0.05);}
+.field input:focus,.field textarea:focus{outline:none;border-color:var(--blue);background:rgba(79,142,247,0.05);}
 .field input::placeholder,.field textarea::placeholder{color:var(--text3);}
-
-/* CHIPS */
 .chips-label{font-size:12px;font-weight:500;color:var(--textA);margin-bottom:8px;display:block;}
 .chips{display:flex;flex-wrap:wrap;gap:6px;margin-bottom:1rem;}
 .chip{background:transparent;border:1px solid var(--border);color:var(--text2);
-  font-size:12px;padding:5px 12px;border-radius:20px;cursor:pointer;
-  font-family:var(--font);transition:all 0.2s;}
+  font-size:12px;padding:5px 12px;border-radius:20px;cursor:pointer;font-family:var(--font);transition:all 0.2s;}
 .chip:hover{border-color:var(--blue);color:var(--blue);}
 .chip.selected{background:var(--blue);border-color:var(--blue);color:#fff;}
-
-/* RUN BUTTON */
 .run-btn{width:100%;background:var(--blue);color:#fff;border:none;padding:13px;
-  border-radius:10px;font-size:15px;font-weight:600;cursor:pointer;
-  font-family:var(--font);transition:all 0.2s;display:flex;align-items:center;
-  justify-content:center;gap:8px;margin-bottom:1.5rem;}
+  border-radius:10px;font-size:15px;font-weight:600;cursor:pointer;font-family:var(--font);
+  transition:all 0.2s;display:flex;align-items:center;justify-content:center;gap:8px;margin-bottom:1.5rem;}
 .run-btn:hover{background:var(--blue-h);}
 .run-btn:disabled{opacity:0.5;cursor:not-allowed;}
-
-/* STEP TRACKER */
 .steps{display:flex;flex-direction:column;gap:8px;}
-.step{display:flex;align-items:center;gap:10px;padding:8px 10px;
-  border-radius:8px;transition:all 0.3s;}
-.step.running{background:rgba(79,142,247,0.08);}
+.step{display:flex;align-items:center;gap:10px;padding:8px 10px;border-radius:8px;transition:all 0.3s;}
+.step.active{background:rgba(79,142,247,0.08);}
 .step.done{background:rgba(16,185,129,0.06);}
 .step.failed{background:rgba(239,68,68,0.06);}
-.step-dot{width:20px;height:20px;border-radius:50%;border:2px solid var(--border);
-  display:flex;align-items:center;justify-content:center;flex-shrink:0;transition:all 0.3s;}
-.step.running .step-dot{border-color:var(--blue);animation:pulse 1s infinite;}
-.step.done .step-dot{background:var(--green);border-color:var(--green);}
-.step.failed .step-dot{background:var(--red);border-color:var(--red);}
-@keyframes pulse{0%,100%{box-shadow:0 0 0 0 rgba(79,142,247,0.4);}50%{box-shadow:0 0 0 6px rgba(79,142,247,0);}}
-.step-info{flex:1;}
-.step-name{font-size:12px;font-weight:500;}
-.step-status{font-size:11px;color:var(--text2);}
-.step.running .step-name{color:var(--blue);}
+.step-indicator{width:22px;height:22px;border-radius:50%;border:2px solid var(--border);
+  display:flex;align-items:center;justify-content:center;flex-shrink:0;font-size:10px;font-weight:700;}
+.step.active .step-indicator{border-color:var(--blue);animation:stepulse 1s infinite;}
+.step.done .step-indicator{background:var(--green);border-color:var(--green);color:#fff;}
+.step.failed .step-indicator{background:var(--red);border-color:var(--red);color:#fff;}
+@keyframes stepulse{0%,100%{box-shadow:0 0 0 0 rgba(79,142,247,0.4);}50%{box-shadow:0 0 0 6px rgba(79,142,247,0);}}
+.step-name{font-size:12px;font-weight:500;flex:1;}
+.step-stat{font-size:11px;color:var(--text2);}
+.step.active .step-name{color:var(--blue);}
 .step.done .step-name{color:var(--green);}
 .step.failed .step-name{color:var(--red);}
 .elapsed{font-size:11px;color:var(--text3);text-align:center;margin-top:8px;}
 
-/* OUTPUT PANEL */
-.output-panel{background:var(--card);border:1px solid var(--border);
-  border-radius:16px;padding:1.5rem;min-height:500px;}
+/* OUTPUT */
+.output-panel{background:var(--card);border:1px solid var(--border);border-radius:16px;padding:1.5rem;min-height:500px;}
 .out-title{font-size:1.1rem;font-weight:600;margin-bottom:4px;}
 .out-sub{font-size:12px;color:var(--text2);margin-bottom:1.5rem;}
-
-/* EMPTY STATE */
-.empty-state{display:flex;flex-direction:column;align-items:center;
-  justify-content:center;min-height:400px;text-align:center;gap:1rem;}
-.empty-icon{width:64px;height:64px;background:rgba(79,142,247,0.08);
-  border-radius:16px;display:flex;align-items:center;justify-content:center;}
-.empty-icon svg{width:32px;height:32px;stroke:var(--text3);fill:none;stroke-width:1.5;}
+.empty-state{display:flex;flex-direction:column;align-items:center;justify-content:center;
+  min-height:400px;text-align:center;gap:1rem;}
 .empty-state h3{font-size:1rem;font-weight:500;color:var(--text2);}
 .empty-state p{font-size:13px;color:var(--text3);max-width:300px;line-height:1.6;}
-
-/* LOADING SKELETON */
+.empty-icon{width:64px;height:64px;background:rgba(79,142,247,0.08);border-radius:16px;
+  display:flex;align-items:center;justify-content:center;}
+.empty-icon svg{width:32px;height:32px;stroke:var(--text3);fill:none;stroke-width:1.5;}
+@keyframes shimmer{0%{background-position:200% 0;}100%{background-position:-200% 0;}}
 .skeleton{background:linear-gradient(90deg,var(--card) 25%,rgba(79,142,247,0.05) 50%,var(--card) 75%);
   background-size:200% 100%;animation:shimmer 1.5s infinite;border-radius:8px;}
-@keyframes shimmer{0%{background-position:200% 0;}100%{background-position:-200% 0;}}
 
 /* OUTPUT CARDS */
-.out-card{background:rgba(255,255,255,0.02);border:1px solid var(--border);
-  border-radius:12px;margin-bottom:1rem;overflow:hidden;}
-.out-card-head{padding:12px 16px;display:flex;align-items:center;gap:10px;
-  cursor:pointer;user-select:none;transition:background 0.2s;}
+.out-card{background:rgba(255,255,255,0.02);border:1px solid var(--border);border-radius:12px;margin-bottom:1rem;overflow:hidden;}
+.out-card-head{padding:12px 16px;display:flex;align-items:center;gap:10px;cursor:pointer;transition:background 0.2s;}
 .out-card-head:hover{background:rgba(255,255,255,0.03);}
-.out-card-icon{width:32px;height:32px;background:rgba(79,142,247,0.1);
-  border-radius:8px;display:flex;align-items:center;justify-content:center;}
+.out-card-icon{width:32px;height:32px;background:rgba(79,142,247,0.1);border-radius:8px;
+  display:flex;align-items:center;justify-content:center;}
 .out-card-icon svg{width:16px;height:16px;stroke:var(--blue);fill:none;stroke-width:2;}
 .out-card-title{font-size:13px;font-weight:600;flex:1;}
-.out-badge{font-size:11px;padding:2px 8px;border-radius:10px;
-  background:rgba(16,185,129,0.15);color:var(--green);}
+.out-badge{font-size:11px;padding:2px 8px;border-radius:10px;background:rgba(16,185,129,0.15);color:var(--green);}
 .out-card-body{padding:0 16px 16px;display:none;}
 .out-card-body.open{display:block;}
 .chevron{transition:transform 0.2s;color:var(--text3);}
 .chevron.open{transform:rotate(180deg);}
 
-/* RESEARCH ROWS */
-.research-row{display:flex;gap:12px;padding:6px 0;border-bottom:1px solid rgba(255,255,255,0.04);}
-.research-label{font-size:12px;color:var(--blue);font-weight:500;min-width:140px;flex-shrink:0;}
-.research-val{font-size:12px;color:var(--text);line-height:1.5;}
+/* RAW OUTPUT - the key fix */
+.raw-output{background:rgba(0,0,0,0.3);border-radius:8px;padding:16px;
+  font-size:13px;color:var(--text2);line-height:1.8;white-space:pre-wrap;
+  word-break:break-word;max-height:600px;overflow-y:auto;font-family:var(--font);}
+.raw-output-label{font-size:11px;color:var(--blue);font-weight:500;
+  margin-bottom:8px;letter-spacing:0.5px;}
 
 /* CONTACT CARDS */
 .contact-card{background:rgba(255,255,255,0.03);border:1px solid var(--border);
   border-radius:10px;padding:12px;margin-bottom:8px;}
 .contact-name{font-size:13px;font-weight:600;margin-bottom:2px;}
-.contact-title{font-size:12px;color:var(--blue);margin-bottom:6px;}
-.contact-email{font-size:12px;color:var(--text2);display:flex;align-items:center;gap:6px;}
+.contact-role{font-size:12px;color:var(--blue);margin-bottom:4px;}
+.contact-detail{font-size:11px;color:var(--text2);}
 
 /* EMAIL CARDS */
 .email-card{background:rgba(255,255,255,0.03);border:1px solid var(--border);
   border-radius:10px;padding:14px;margin-bottom:10px;}
 .email-to{font-size:12px;color:var(--blue);font-weight:600;margin-bottom:4px;}
-.email-subject{font-size:13px;font-weight:600;margin-bottom:10px;color:var(--text);}
-.email-body{font-size:12px;color:var(--text2);line-height:1.7;white-space:pre-wrap;
+.email-subj{font-size:13px;font-weight:600;margin-bottom:10px;}
+.email-body-text{font-size:12px;color:var(--text2);line-height:1.7;white-space:pre-wrap;
   background:rgba(0,0,0,0.2);border-radius:8px;padding:10px;margin-bottom:10px;}
-.copy-btns{display:flex;gap:8px;}
+.copy-btns{display:flex;gap:8px;flex-wrap:wrap;}
 .copy-btn{background:transparent;border:1px solid var(--border);color:var(--text2);
-  font-size:11px;padding:5px 12px;border-radius:6px;cursor:pointer;
-  font-family:var(--font);transition:all 0.2s;}
+  font-size:11px;padding:5px 12px;border-radius:6px;cursor:pointer;font-family:var(--font);transition:all 0.2s;}
 .copy-btn:hover{border-color:var(--blue);color:var(--blue);}
 .copy-btn.copied{border-color:var(--green);color:var(--green);}
-
-/* ERROR */
 .error-card{background:rgba(239,68,68,0.08);border:1px solid rgba(239,68,68,0.3);
   border-radius:12px;padding:1.5rem;text-align:center;}
 .error-card h3{color:var(--red);margin-bottom:8px;font-size:15px;}
 .error-card p{color:var(--text2);font-size:13px;margin-bottom:1rem;line-height:1.6;}
 .retry-btn{background:var(--red);color:#fff;border:none;padding:10px 20px;
-  border-radius:8px;font-size:13px;font-weight:500;cursor:pointer;font-family:var(--font);}
-
-/* RESET */
-.reset-btn{width:100%;background:transparent;border:1px solid var(--border);
-  color:var(--text2);padding:11px;border-radius:10px;font-size:14px;
-  cursor:pointer;font-family:var(--font);transition:all 0.2s;margin-top:1rem;}
+  border-radius:8px;font-size:13px;font-weight:500;cursor:pointer;font-family:var(--font);margin-right:8px;}
+.reset-btn{width:100%;background:transparent;border:1px solid var(--border);color:var(--text2);
+  padding:11px;border-radius:10px;font-size:14px;cursor:pointer;font-family:var(--font);
+  transition:all 0.2s;margin-top:1rem;}
 .reset-btn:hover{border-color:var(--blue);color:var(--blue);}
 
-/* HOW IT WORKS */
-.how-wrap{max-width:700px;margin:0 auto;padding:4rem 2rem;}
-.how-wrap h2{text-align:center;font-size:2rem;font-weight:700;margin-bottom:0.75rem;}
-.how-wrap .sub{text-align:center;color:var(--text2);margin-bottom:3rem;}
-.timeline{display:flex;flex-direction:column;gap:0;}
-.tl-item{display:flex;gap:1.5rem;position:relative;}
-.tl-left{display:flex;flex-direction:column;align-items:center;}
-.tl-node{width:36px;height:36px;border-radius:50%;background:var(--blue);
-  display:flex;align-items:center;justify-content:center;font-weight:700;
-  font-size:13px;flex-shrink:0;z-index:1;}
-.tl-node.done{background:var(--green);}
-.tl-line{width:2px;background:var(--border);flex:1;margin:4px 0;}
-.tl-content{padding-bottom:2.5rem;flex:1;}
-.tl-content h3{font-size:1rem;font-weight:600;margin-bottom:6px;}
-.tl-content p{font-size:13px;color:var(--text2);line-height:1.6;}
-.tech-row{display:flex;flex-wrap:wrap;gap:8px;justify-content:center;margin:2rem 0;}
-.tech-badge{background:var(--card);border:1px solid var(--border);border-radius:8px;
-  padding:8px 16px;font-size:13px;font-weight:500;}
-
-/* RAW OUTPUT */
-.raw-output{background:rgba(0,0,0,0.3);border-radius:8px;padding:12px;
-  font-size:12px;color:var(--text2);line-height:1.7;white-space:pre-wrap;
-  max-height:400px;overflow-y:auto;margin-bottom:1rem;}
+/* DEBUG PANEL */
+.debug-panel{margin-top:1rem;background:rgba(0,0,0,0.4);border:1px solid var(--border);
+  border-radius:8px;padding:12px;}
+.debug-label{font-size:10px;color:var(--text3);font-weight:600;letter-spacing:1px;margin-bottom:6px;}
+.debug-body{font-size:11px;color:var(--text3);font-family:monospace;white-space:pre-wrap;
+  word-break:break-all;max-height:150px;overflow-y:auto;}
 </style>
 </head>
 <body>
@@ -265,14 +204,11 @@ footer span{font-size:12px;color:var(--text3);}
   </div>
 </nav>
 
-<!-- VIEW 1: LANDING -->
+<!-- LANDING -->
 <div id="view-landing" class="view active">
   <section class="hero">
     <div class="orb"></div>
-    <div class="badge">
-      <svg width="12" height="12" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5"><circle cx="12" cy="12" r="10"/><path d="m9 12 2 2 4-4"/></svg>
-      Powered by Lyzr AI Agent Studio
-    </div>
+    <div class="badge">Powered by Lyzr AI Agent Studio</div>
     <h1>Enterprise Outreach,<br/><span>Automated.</span></h1>
     <p>Research any B2B SaaS company, identify the right decision-makers, and receive personalized outreach emails drafted by AI. All in one pipeline.</p>
     <div class="hero-btns">
@@ -281,51 +217,33 @@ footer span{font-size:12px;color:var(--text3);}
     </div>
     <p class="powered">Built on Apollo.io + Tavily + Claude Sonnet 4.6</p>
   </section>
-
   <section class="pipeline-section">
     <h2>Three agents. One pipeline.</h2>
     <p class="sub">A manager agent orchestrates three specialized sub-agents in sequence.</p>
     <div class="cards-grid">
       <div class="pipeline-card">
         <div class="card-num">01</div>
-        <div class="card-icon">
-          <svg viewBox="0 0 24 24"><circle cx="11" cy="11" r="8"/><path d="m21 21-4.35-4.35"/></svg>
-        </div>
+        <div class="card-icon"><svg viewBox="0 0 24 24"><circle cx="11" cy="11" r="8"/><path d="m21 21-4.35-4.35"/></svg></div>
         <h3>Company Intelligence</h3>
         <p>Researches the target company across the web. Returns funding stage, product focus, AI signals, recent news, and ICP fit score.</p>
         <span class="card-tag">Tavily Search</span>
       </div>
       <div class="pipeline-card">
         <div class="card-num">02</div>
-        <div class="card-icon">
-          <svg viewBox="0 0 24 24"><path d="M17 21v-2a4 4 0 0 0-4-4H5a4 4 0 0 0-4 4v2"/><circle cx="9" cy="7" r="4"/><path d="M23 21v-2a4 4 0 0 0-3-3.87"/><path d="M16 3.13a4 4 0 0 1 0 7.75"/></svg>
-        </div>
+        <div class="card-icon"><svg viewBox="0 0 24 24"><path d="M17 21v-2a4 4 0 0 0-4-4H5a4 4 0 0 0-4 4v2"/><circle cx="9" cy="7" r="4"/><path d="M23 21v-2a4 4 0 0 0-3-3.87"/><path d="M16 3.13a4 4 0 0 1 0 7.75"/></svg></div>
         <h3>Decision Maker Finder</h3>
         <p>Queries Apollo.io to surface CTOs, Heads of AI, VPs of Engineering, and other buying personas at the target company.</p>
         <span class="card-tag">Apollo.io</span>
       </div>
       <div class="pipeline-card">
         <div class="card-num">03</div>
-        <div class="card-icon">
-          <svg viewBox="0 0 24 24"><path d="M4 4h16c1.1 0 2 .9 2 2v12c0 1.1-.9 2-2 2H4c-1.1 0-2-.9-2-2V6c0-1.1.9-2 2-2z"/><polyline points="22,6 12,13 2,6"/></svg>
-        </div>
+        <div class="card-icon"><svg viewBox="0 0 24 24"><path d="M4 4h16c1.1 0 2 .9 2 2v12c0 1.1-.9 2-2 2H4c-1.1 0-2-.9-2-2V6c0-1.1.9-2 2-2z"/><polyline points="22,6 12,13 2,6"/></svg></div>
         <h3>Personalized Outreach</h3>
         <p>Drafts one tailored cold email per contact, grounded in real company data. No templates. No generic copy.</p>
         <span class="card-tag">Claude Sonnet 4.6</span>
       </div>
     </div>
   </section>
-
-  <section class="why-section">
-    <h2>Why this beats manual outreach</h2>
-    <div class="why-grid">
-      <div class="why-card"><div class="num">3</div><p>Specialized agents working in sequence, not in parallel</p></div>
-      <div class="why-card"><div class="num">0</div><p>Hallucinations. Grounded in real web data and verified company info</p></div>
-      <div class="why-card"><div class="num">1</div><p>Pipeline from research to ready-to-send email in a single run</p></div>
-      <div class="why-card"><div class="num">100%</div><p>Data stays on your Lyzr instance. Nothing shared externally</p></div>
-    </div>
-  </section>
-
   <footer>
     <span>Built by Shivang Sharma</span>
     <span>POWERED BY LYZR AI AGENT STUDIO</span>
@@ -333,15 +251,12 @@ footer span{font-size:12px;color:var(--text3);}
   </footer>
 </div>
 
-<!-- VIEW 2: CONSOLE -->
+<!-- CONSOLE -->
 <div id="view-console" class="view">
   <div class="console-wrap">
-
-    <!-- INPUT -->
     <div class="input-panel">
       <p class="panel-title">Target Company</p>
       <p class="panel-sub">Fill in what you know. More context = better output.</p>
-
       <div class="field">
         <label>Company Name <span class="req">*</span></label>
         <input type="text" id="company-name" placeholder="e.g. Razorpay, Darwinbox, Slintel"/>
@@ -355,15 +270,14 @@ footer span{font-size:12px;color:var(--text3);}
         <input type="text" id="company-hq" placeholder="e.g. Bengaluru, India"/>
       </div>
       <div class="field">
-        <label>Industry / Vertical</label>
+        <label>Industry</label>
         <input type="text" id="company-industry" placeholder="e.g. Fintech, HR Tech, Sales Tech"/>
       </div>
       <div class="field">
         <label>Company Size / Stage</label>
         <input type="text" id="company-size" placeholder="e.g. Series B, 500 employees"/>
       </div>
-
-      <span class="chips-label">Who do you want to reach? <span class="req">*</span></span>
+      <span class="chips-label">Target contact titles <span class="req">*</span></span>
       <div class="chips" id="chips">
         <button class="chip" data-val="CTO">CTO</button>
         <button class="chip" data-val="VP Engineering">VP Engineering</button>
@@ -376,47 +290,37 @@ footer span{font-size:12px;color:var(--text3);}
         <button class="chip" data-val="Head of Growth">Head of Growth</button>
         <button class="chip" data-val="Co-founder">Co-founder</button>
       </div>
-
       <div class="field">
         <label>Additional Context</label>
-        <textarea id="company-notes" rows="3" placeholder="Any recent news, mutual connections, or specific angle to target?"></textarea>
+        <textarea id="company-notes" rows="2" placeholder="Recent news, mutual connections, specific angle..."></textarea>
       </div>
-
       <button class="run-btn" id="run-btn" onclick="runPipeline()">
         <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5"><polygon points="5 3 19 12 5 21 5 3"/></svg>
         Run Pipeline
       </button>
-
-      <div class="steps" id="steps">
+      <div class="steps">
         <div class="step" id="step1">
-          <div class="step-dot"></div>
-          <div class="step-info">
-            <div class="step-name">Company Research</div>
-            <div class="step-status">Pending</div>
-          </div>
+          <div class="step-indicator"></div>
+          <span class="step-name">Company Research</span>
+          <span class="step-stat" id="stat1">Pending</span>
         </div>
         <div class="step" id="step2">
-          <div class="step-dot"></div>
-          <div class="step-info">
-            <div class="step-name">Contact Finding</div>
-            <div class="step-status">Pending</div>
-          </div>
+          <div class="step-indicator"></div>
+          <span class="step-name">Contact Finding</span>
+          <span class="step-stat" id="stat2">Pending</span>
         </div>
         <div class="step" id="step3">
-          <div class="step-dot"></div>
-          <div class="step-info">
-            <div class="step-name">Outreach Drafting</div>
-            <div class="step-status">Pending</div>
-          </div>
+          <div class="step-indicator"></div>
+          <span class="step-name">Outreach Drafting</span>
+          <span class="step-stat" id="stat3">Pending</span>
         </div>
       </div>
       <div class="elapsed" id="elapsed"></div>
     </div>
 
-    <!-- OUTPUT -->
     <div class="output-panel">
       <p class="out-title">Pipeline Output</p>
-      <p class="out-sub">Results appear as each agent completes.</p>
+      <p class="out-sub">Results appear after the pipeline completes.</p>
       <div id="output-area">
         <div class="empty-state">
           <div class="empty-icon">
@@ -427,51 +331,58 @@ footer span{font-size:12px;color:var(--text3);}
         </div>
       </div>
     </div>
-
   </div>
 </div>
 
-<!-- VIEW 3: HOW IT WORKS -->
+<!-- HOW IT WORKS -->
 <div id="view-how" class="view">
-  <div class="how-wrap">
-    <h2>How the Pipeline Works</h2>
-    <p class="sub">Three specialized AI agents, orchestrated by a manager agent on Lyzr Studio.</p>
-
-    <div class="timeline">
-      <div class="tl-item">
-        <div class="tl-left"><div class="tl-node">1</div><div class="tl-line"></div></div>
-        <div class="tl-content"><h3>You enter a target company</h3><p>Provide the company name and any context you have. More detail means more targeted output from the pipeline.</p></div>
+  <div style="max-width:700px;margin:0 auto;padding:4rem 2rem;">
+    <h2 style="text-align:center;font-size:2rem;font-weight:700;margin-bottom:0.75rem;">How the Pipeline Works</h2>
+    <p style="text-align:center;color:var(--text2);margin-bottom:3rem;">Three specialized AI agents, orchestrated by a manager agent on Lyzr Studio.</p>
+    <div style="display:flex;flex-direction:column;gap:0;">
+      <div style="display:flex;gap:1.5rem;">
+        <div style="display:flex;flex-direction:column;align-items:center;">
+          <div style="width:36px;height:36px;border-radius:50%;background:var(--blue);display:flex;align-items:center;justify-content:center;font-weight:700;font-size:13px;">1</div>
+          <div style="width:2px;background:var(--border);flex:1;margin:4px 0;min-height:40px;"></div>
+        </div>
+        <div style="padding-bottom:2rem;flex:1;"><h3 style="font-size:1rem;font-weight:600;margin-bottom:6px;">You enter a target company</h3><p style="font-size:13px;color:var(--text2);line-height:1.6;">Provide the company name and any context. More detail means more targeted output.</p></div>
       </div>
-      <div class="tl-item">
-        <div class="tl-left"><div class="tl-node">2</div><div class="tl-line"></div></div>
-        <div class="tl-content"><h3>Company Research Agent fires</h3><p>Powered by Tavily web search. Researches the company's product, funding stage, recent news, AI adoption signals, and assigns an ICP fit score.</p></div>
+      <div style="display:flex;gap:1.5rem;">
+        <div style="display:flex;flex-direction:column;align-items:center;">
+          <div style="width:36px;height:36px;border-radius:50%;background:var(--blue);display:flex;align-items:center;justify-content:center;font-weight:700;font-size:13px;">2</div>
+          <div style="width:2px;background:var(--border);flex:1;margin:4px 0;min-height:40px;"></div>
+        </div>
+        <div style="padding-bottom:2rem;flex:1;"><h3 style="font-size:1rem;font-weight:600;margin-bottom:6px;">Company Research Agent fires</h3><p style="font-size:13px;color:var(--text2);line-height:1.6;">Powered by Tavily. Researches product, funding, recent news, AI signals, and assigns an ICP fit score.</p></div>
       </div>
-      <div class="tl-item">
-        <div class="tl-left"><div class="tl-node">3</div><div class="tl-line"></div></div>
-        <div class="tl-content"><h3>Contact Finder Agent fires</h3><p>Queries Apollo.io with the research context. Returns verified decision-makers: name, title, and email where available.</p></div>
+      <div style="display:flex;gap:1.5rem;">
+        <div style="display:flex;flex-direction:column;align-items:center;">
+          <div style="width:36px;height:36px;border-radius:50%;background:var(--blue);display:flex;align-items:center;justify-content:center;font-weight:700;font-size:13px;">3</div>
+          <div style="width:2px;background:var(--border);flex:1;margin:4px 0;min-height:40px;"></div>
+        </div>
+        <div style="padding-bottom:2rem;flex:1;"><h3 style="font-size:1rem;font-weight:600;margin-bottom:6px;">Contact Finder Agent fires</h3><p style="font-size:13px;color:var(--text2);line-height:1.6;">Queries Apollo.io with the research context. Returns verified decision-makers with name, title, and email.</p></div>
       </div>
-      <div class="tl-item">
-        <div class="tl-left"><div class="tl-node">4</div><div class="tl-line"></div></div>
-        <div class="tl-content"><h3>Outreach Drafting Agent fires</h3><p>Drafts one personalized cold email per contact. Grounded in the company research. Under 150 words, no generic openers, peer-to-peer tone.</p></div>
+      <div style="display:flex;gap:1.5rem;">
+        <div style="display:flex;flex-direction:column;align-items:center;">
+          <div style="width:36px;height:36px;border-radius:50%;background:var(--blue);display:flex;align-items:center;justify-content:center;font-weight:700;font-size:13px;">4</div>
+          <div style="width:2px;background:var(--border);flex:1;margin:4px 0;min-height:40px;"></div>
+        </div>
+        <div style="padding-bottom:2rem;flex:1;"><h3 style="font-size:1rem;font-weight:600;margin-bottom:6px;">Outreach Drafting Agent fires</h3><p style="font-size:13px;color:var(--text2);line-height:1.6;">Drafts one personalized cold email per contact. Under 150 words, grounded in real company data.</p></div>
       </div>
-      <div class="tl-item">
-        <div class="tl-left"><div class="tl-node done">✓</div></div>
-        <div class="tl-content"><h3>You receive ready-to-send emails</h3><p>Copy each email with one click. Everything grounded in real data from the research brief.</p></div>
+      <div style="display:flex;gap:1.5rem;">
+        <div style="display:flex;flex-direction:column;align-items:center;">
+          <div style="width:36px;height:36px;border-radius:50%;background:var(--green);display:flex;align-items:center;justify-content:center;font-weight:700;font-size:13px;">✓</div>
+        </div>
+        <div style="flex:1;"><h3 style="font-size:1rem;font-weight:600;margin-bottom:6px;">You receive ready-to-send emails</h3><p style="font-size:13px;color:var(--text2);line-height:1.6;">Copy each email with one click. Everything grounded in real data.</p></div>
       </div>
     </div>
-
-    <div class="tech-row">
-      <span class="tech-badge">Lyzr AI Agent Studio</span>
-      <span class="tech-badge">Claude Sonnet 4.6</span>
-      <span class="tech-badge">Apollo.io</span>
-      <span class="tech-badge">Tavily Search</span>
+    <div style="display:flex;flex-wrap:wrap;gap:8px;justify-content:center;margin:2rem 0;">
+      <span style="background:var(--card);border:1px solid var(--border);border-radius:8px;padding:8px 16px;font-size:13px;font-weight:500;">Lyzr AI Agent Studio</span>
+      <span style="background:var(--card);border:1px solid var(--border);border-radius:8px;padding:8px 16px;font-size:13px;font-weight:500;">Claude Sonnet 4.6</span>
+      <span style="background:var(--card);border:1px solid var(--border);border-radius:8px;padding:8px 16px;font-size:13px;font-weight:500;">Apollo.io</span>
+      <span style="background:var(--card);border:1px solid var(--border);border-radius:8px;padding:8px 16px;font-size:13px;font-weight:500;">Tavily Search</span>
     </div>
-
-    <div style="text-align:center;">
-      <button class="btn-primary" onclick="showView('console')">Try it now</button>
-    </div>
+    <div style="text-align:center;"><button class="btn-primary" onclick="showView('console')">Try it now</button></div>
   </div>
-
   <footer>
     <span>Built by Chetna Arora</span>
     <span>POWERED BY LYZR AI AGENT STUDIO</span>
@@ -481,28 +392,30 @@ footer span{font-size:12px;color:var(--text3);}
 
 <script>
 const PROXY_URL = "/api/proxy";
+let elapsedTimer = null;
+let startTime = null;
+let lastRawResponse = "";
 
 function showView(name) {
   document.querySelectorAll(".view").forEach(v => v.classList.remove("active"));
   document.getElementById("view-" + name).classList.add("active");
-  window.scrollTo(0,0);
+  window.scrollTo(0, 0);
 }
 
 document.querySelectorAll(".chip").forEach(chip => {
   chip.addEventListener("click", () => chip.classList.toggle("selected"));
 });
 
-let elapsedTimer = null;
-let startTime = null;
-
 function getSelectedTitles() {
   return Array.from(document.querySelectorAll(".chip.selected")).map(c => c.dataset.val);
 }
 
-function setStep(n, state, statusText) {
+function setStep(n, state, statText) {
   const el = document.getElementById("step" + n);
   el.className = "step " + state;
-  el.querySelector(".step-status").textContent = statusText;
+  document.getElementById("stat" + n).textContent = statText;
+  const ind = el.querySelector(".step-indicator");
+  ind.textContent = state === "done" ? "✓" : state === "failed" ? "✗" : "";
 }
 
 function buildMessage() {
@@ -516,193 +429,144 @@ function buildMessage() {
   return `Begin outreach for '${name}'\nURL: ${url}\nHQ: ${hq}\nIndustry: ${industry}\nCompany Size: ${size}\nTarget contact titles: ${titles}\nAdditional context: ${notes}`;
 }
 
-function renderOutput(raw) {
-  const area = document.getElementById("output-area");
-  area.innerHTML = "";
-
-  const lower = raw.toLowerCase();
-  const hasResearch = lower.includes("company:") || lower.includes("industry vertical") || lower.includes("core product") || lower.includes("icp fit");
-  const hasContacts = lower.includes("contact") || lower.includes("name:") || lower.includes("title:");
-  const hasEmails   = lower.includes("subject:") || lower.includes("to:") || lower.includes("dear ");
-
-  if (hasResearch) {
-    setStep(1, "done", "Complete");
-    area.appendChild(makeResearchCard(raw));
-  }
-  if (hasContacts) {
-    setStep(2, "done", "Complete");
-    area.appendChild(makeContactsCard(raw));
-  }
-  if (hasEmails) {
-    setStep(3, "done", "Complete");
-    area.appendChild(makeEmailsCard(raw));
-  }
-
-  if (!hasResearch && !hasContacts && !hasEmails) {
-    area.innerHTML = `<div class="raw-output">${escHtml(raw)}</div>`;
-  }
-
-  const reset = document.createElement("button");
-  reset.className = "reset-btn";
-  reset.textContent = "Start New Pipeline";
-  reset.onclick = resetAll;
-  area.appendChild(reset);
+function esc(s) {
+  return String(s || "").replace(/&/g,"&amp;").replace(/</g,"&lt;").replace(/>/g,"&gt;");
 }
-
-function makeResearchCard(raw) {
-  const card = outCard(
-    svgSearch(), "Company Intelligence", "Complete",
-    function(body) {
-      const lines = raw.split("\n");
-      const keys = ["Company","Industry vertical","Core product","Company size","Recent news","AI/automation signals","ICP fit score"];
-      keys.forEach(k => {
-        const line = lines.find(l => l.toLowerCase().startsWith(k.toLowerCase() + ":"));
-        if (line) {
-          const row = document.createElement("div");
-          row.className = "research-row";
-          row.innerHTML = `<span class="research-label">${k}</span><span class="research-val">${escHtml(line.substring(line.indexOf(":")+1).trim())}</span>`;
-          body.appendChild(row);
-        }
-      });
-      if (!body.children.length) {
-        const raw_section = extractSection(raw, ["company brief","company intelligence","research"], ["contacts","decision makers","outreach","email"]);
-        body.innerHTML = `<div class="raw-output">${escHtml(raw_section || raw.substring(0,800))}</div>`;
-      }
-    }
-  );
-  return card;
-}
-
-function makeContactsCard(raw) {
-  const card = outCard(
-    svgUsers(), "Decision Makers Found", "Found",
-    function(body) {
-      const blocks = raw.split(/\n{2,}/).filter(b =>
-        (b.toLowerCase().includes("name:") || b.toLowerCase().includes("title:")) && b.trim().length > 10
-      );
-      if (blocks.length) {
-        blocks.slice(0,5).forEach(block => {
-          const cc = document.createElement("div");
-          cc.className = "contact-card";
-          const nameM   = block.match(/name[:\s]+([^\n]+)/i);
-          const titleM  = block.match(/title[:\s]+([^\n]+)/i);
-          const emailM  = block.match(/email[:\s]+([^\n]+)/i);
-          const linkedM = block.match(/linkedin[:\s]+([^\n]+)/i);
-          cc.innerHTML = `
-            <div class="contact-name">${escHtml(nameM ? nameM[1].trim() : "Contact")}</div>
-            <div class="contact-title">${escHtml(titleM ? titleM[1].trim() : "")}</div>
-            ${emailM ? `<div class="contact-email"><svg width="12" height="12" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M4 4h16c1.1 0 2 .9 2 2v12c0 1.1-.9 2-2 2H4c-1.1 0-2-.9-2-2V6c0-1.1.9-2 2-2z"/><polyline points="22,6 12,13 2,6"/></svg>${escHtml(emailM[1].trim())}</div>` : ""}
-            ${linkedM ? `<a href="${escHtml(linkedM[1].trim())}" style="font-size:11px;color:var(--blue);text-decoration:none;" target="_blank">LinkedIn</a>` : ""}
-          `;
-          body.appendChild(cc);
-        });
-      } else {
-        const raw_section = extractSection(raw, ["contacts","decision makers"], ["outreach","email","subject:"]);
-        body.innerHTML = `<div class="raw-output">${escHtml(raw_section || "See full output above")}</div>`;
-      }
-    }
-  );
-  return card;
-}
-
-function makeEmailsCard(raw) {
-  const card = outCard(
-    svgMail(), "Email Drafts Ready", "Ready",
-    function(body) {
-      const emailBlocks = raw.split(/(?=(?:---|\*\*To:|To:))/g).filter(b => b.includes("Subject:") || b.includes("subject:"));
-      if (emailBlocks.length) {
-        emailBlocks.slice(0,5).forEach((block, i) => {
-          const toM   = block.match(/to[:\s]+([^\n]+)/i);
-          const subM  = block.match(/subject[:\s]+([^\n]+)/i);
-          const bodyStart = block.search(/\n\n/);
-          const emailBody = bodyStart > -1 ? block.substring(bodyStart).trim() : block;
-          const ec = document.createElement("div");
-          ec.className = "email-card";
-          const copyId = "copy-" + i;
-          ec.innerHTML = `
-            <div class="email-to">${escHtml(toM ? "To: " + toM[1].trim() : "")}</div>
-            <div class="email-subject">Subject: ${escHtml(subM ? subM[1].trim() : "")}</div>
-            <div class="email-body">${escHtml(emailBody.replace(/^(to:|subject:)[^\n]*/gim,"").trim())}</div>
-            <div class="copy-btns">
-              <button class="copy-btn" id="${copyId}-full" onclick="copyEmail('${copyId}','${escAttr(subM?subM[1].trim():"")}','${escAttr(emailBody)}')">Copy Email</button>
-              <button class="copy-btn" id="${copyId}-subj" onclick="copyText('${copyId}-subj','${escAttr(subM?subM[1].trim():"")}')">Copy Subject</button>
-            </div>
-          `;
-          body.appendChild(ec);
-        });
-      } else {
-        body.innerHTML = `<div class="raw-output">${escHtml(raw.substring(raw.toLowerCase().indexOf("subject:")-50, raw.length))}</div>`;
-      }
-    }
-  );
-  return card;
-}
-
-function outCard(iconSvg, title, badge, populate) {
-  const wrap = document.createElement("div");
-  wrap.className = "out-card";
-  const head = document.createElement("div");
-  head.className = "out-card-head";
-  head.innerHTML = `
-    <div class="out-card-icon">${iconSvg}</div>
-    <span class="out-card-title">${title}</span>
-    <span class="out-badge">${badge}</span>
-    <svg class="chevron open" width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><polyline points="18 15 12 9 6 15"/></svg>
-  `;
-  const body = document.createElement("div");
-  body.className = "out-card-body open";
-  populate(body);
-  head.onclick = () => {
-    body.classList.toggle("open");
-    head.querySelector(".chevron").classList.toggle("open");
-  };
-  wrap.appendChild(head);
-  wrap.appendChild(body);
-  return wrap;
-}
-
-function extractSection(text, startKws, endKws) {
-  const lower = text.toLowerCase();
-  let start = -1;
-  startKws.forEach(kw => { const i = lower.indexOf(kw); if (i > -1 && (start === -1 || i < start)) start = i; });
-  if (start === -1) return null;
-  let end = text.length;
-  endKws.forEach(kw => { const i = lower.indexOf(kw, start+10); if (i > -1 && i < end) end = i; });
-  return text.substring(start, end).trim();
-}
-
-function copyEmail(id, subject, body) {
-  const text = "Subject: " + subject + "\n\n" + body;
-  navigator.clipboard.writeText(text).then(() => flash(id + "-full"));
-}
-function copyText(btnId, text) {
-  navigator.clipboard.writeText(text).then(() => flash(btnId));
-}
-function flash(id) {
-  const btn = document.getElementById(id);
-  if (!btn) return;
-  btn.textContent = "Copied!";
-  btn.classList.add("copied");
-  setTimeout(() => { btn.textContent = id.includes("subj") ? "Copy Subject" : "Copy Email"; btn.classList.remove("copied"); }, 2000);
-}
-function escHtml(s) { return String(s||"").replace(/&/g,"&amp;").replace(/</g,"&lt;").replace(/>/g,"&gt;").replace(/"/g,"&quot;"); }
-function escAttr(s) { return String(s||"").replace(/'/g,"\\'").replace(/\n/g,"\\n"); }
-function svgSearch() { return `<svg viewBox="0 0 24 24"><circle cx="11" cy="11" r="8"/><path d="m21 21-4.35-4.35"/></svg>`; }
-function svgUsers() { return `<svg viewBox="0 0 24 24"><path d="M17 21v-2a4 4 0 0 0-4-4H5a4 4 0 0 0-4 4v2"/><circle cx="9" cy="7" r="4"/><path d="M23 21v-2a4 4 0 0 0-3-3.87"/><path d="M16 3.13a4 4 0 0 1 0 7.75"/></svg>`; }
-function svgMail()  { return `<svg viewBox="0 0 24 24"><path d="M4 4h16c1.1 0 2 .9 2 2v12c0 1.1-.9 2-2 2H4c-1.1 0-2-.9-2-2V6c0-1.1.9-2 2-2z"/><polyline points="22,6 12,13 2,6"/></svg>`; }
 
 function resetAll() {
-  document.getElementById("output-area").innerHTML = `<div class="empty-state"><div class="empty-icon"><svg viewBox="0 0 24 24"><path d="M13 2H6a2 2 0 0 0-2 2v16a2 2 0 0 0 2 2h12a2 2 0 0 0 2-2V9z"/><polyline points="13 2 13 9 20 9"/></svg></div><h3>No pipeline run yet</h3><p>Enter a company on the left and click Run Pipeline to begin.</p></div>`;
-  ["step1","step2","step3"].forEach((id,i) => {
-    const el = document.getElementById(id);
-    el.className = "step";
-    el.querySelector(".step-status").textContent = "Pending";
-  });
+  document.getElementById("output-area").innerHTML = `
+    <div class="empty-state">
+      <div class="empty-icon"><svg viewBox="0 0 24 24"><path d="M13 2H6a2 2 0 0 0-2 2v16a2 2 0 0 0 2 2h12a2 2 0 0 0 2-2V9z"/><polyline points="13 2 13 9 20 9"/></svg></div>
+      <h3>No pipeline run yet</h3>
+      <p>Enter a company on the left and click Run Pipeline to begin.</p>
+    </div>`;
+  [1,2,3].forEach(n => setStep(n, "", "Pending"));
   document.getElementById("elapsed").textContent = "";
   document.getElementById("run-btn").disabled = false;
   document.getElementById("run-btn").innerHTML = `<svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5"><polygon points="5 3 19 12 5 21 5 3"/></svg> Run Pipeline`;
   if (elapsedTimer) clearInterval(elapsedTimer);
+  lastRawResponse = "";
 }
+
+function renderOutput(raw) {
+  lastRawResponse = raw;
+  const area = document.getElementById("output-area");
+  area.innerHTML = "";
+
+  const lower = raw.toLowerCase();
+
+  // detect what sections are present
+  const hasResearch = lower.includes("company:") || lower.includes("industry vertical") || lower.includes("core product") || lower.includes("icp fit") || lower.includes("company brief") || lower.includes("recent news");
+  const hasContacts = lower.includes("name:") || lower.includes("contact") || lower.includes("apollo") || lower.includes("decision maker");
+  const hasEmails   = lower.includes("subject:") || lower.includes("dear ") || (lower.includes("to:") && lower.includes("subject"));
+
+  // mark steps done
+  if (hasResearch) setStep(1, "done", "Complete");
+  if (hasContacts) setStep(2, "done", "Complete");
+  if (hasEmails)   setStep(3, "done", "Complete");
+
+  // always show a formatted raw output card first
+  const rawCard = document.createElement("div");
+  rawCard.className = "out-card";
+  rawCard.innerHTML = `
+    <div class="out-card-head" onclick="toggleCard(this)">
+      <div class="out-card-icon"><svg viewBox="0 0 24 24"><path d="M14 2H6a2 2 0 0 0-2 2v16a2 2 0 0 0 2 2h12a2 2 0 0 0 2-2V8z"/><polyline points="14 2 14 8 20 8"/></svg></div>
+      <span class="out-card-title">Full Pipeline Response</span>
+      <span class="out-badge">Complete</span>
+      <svg class="chevron open" width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><polyline points="18 15 12 9 6 15"/></svg>
+    </div>
+    <div class="out-card-body open">
+      <div class="raw-output-label">PIPELINE OUTPUT</div>
+      <div class="raw-output">${esc(raw)}</div>
+      <div style="display:flex;gap:8px;margin-top:10px;">
+        <button class="copy-btn" id="copy-raw-btn" onclick="copyRaw()">Copy Full Output</button>
+      </div>
+    </div>`;
+  area.appendChild(rawCard);
+
+  // try to also extract emails specifically for quick copy
+  if (hasEmails) {
+    const emailCard = extractEmailsCard(raw);
+    if (emailCard) area.appendChild(emailCard);
+  }
+
+  const resetBtn = document.createElement("button");
+  resetBtn.className = "reset-btn";
+  resetBtn.textContent = "Start New Pipeline";
+  resetBtn.onclick = resetAll;
+  area.appendChild(resetBtn);
+}
+
+function extractEmailsCard(raw) {
+  // split on common email delimiters
+  const parts = raw.split(/(?=(?:---+|\*\*Email \d|Email \d|To:|Subject:))/gi)
+    .filter(p => p.toLowerCase().includes("subject:") && p.trim().length > 30);
+
+  if (!parts.length) return null;
+
+  const card = document.createElement("div");
+  card.className = "out-card";
+  card.innerHTML = `
+    <div class="out-card-head" onclick="toggleCard(this)">
+      <div class="out-card-icon"><svg viewBox="0 0 24 24"><path d="M4 4h16c1.1 0 2 .9 2 2v12c0 1.1-.9 2-2 2H4c-1.1 0-2-.9-2-2V6c0-1.1.9-2 2-2z"/><polyline points="22,6 12,13 2,6"/></svg></div>
+      <span class="out-card-title">Email Drafts</span>
+      <span class="out-badge">${parts.length} draft${parts.length > 1 ? "s" : ""}</span>
+      <svg class="chevron open" width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><polyline points="18 15 12 9 6 15"/></svg>
+    </div>`;
+
+  const body = document.createElement("div");
+  body.className = "out-card-body open";
+
+  parts.slice(0, 5).forEach((block, i) => {
+    const toM   = block.match(/to[:\s]+([^\n]+)/i);
+    const subM  = block.match(/subject[:\s]+([^\n]+)/i);
+    const cleaned = block
+      .replace(/^(to:|subject:)[^\n]*/gim, "")
+      .replace(/^---+$/gm, "")
+      .trim();
+
+    const ec = document.createElement("div");
+    ec.className = "email-card";
+    ec.innerHTML = `
+      <div class="email-to">${esc(toM ? "To: " + toM[1].trim() : "Email " + (i+1))}</div>
+      <div class="email-subj">Subject: ${esc(subM ? subM[1].trim() : "")}</div>
+      <div class="email-body-text">${esc(cleaned)}</div>
+      <div class="copy-btns">
+        <button class="copy-btn" id="ec-${i}" onclick="copyEmailBlock(${i}, \`${escJ(subM?subM[1].trim():"")}\`, \`${escJ(cleaned)}\`)">Copy Email</button>
+      </div>`;
+    body.appendChild(ec);
+  });
+
+  card.appendChild(body);
+  return card;
+}
+
+function toggleCard(head) {
+  const body = head.nextElementSibling;
+  body.classList.toggle("open");
+  head.querySelector(".chevron").classList.toggle("open");
+}
+
+function copyRaw() {
+  navigator.clipboard.writeText(lastRawResponse).then(() => {
+    const btn = document.getElementById("copy-raw-btn");
+    btn.textContent = "Copied!";
+    btn.classList.add("copied");
+    setTimeout(() => { btn.textContent = "Copy Full Output"; btn.classList.remove("copied"); }, 2000);
+  });
+}
+
+function copyEmailBlock(i, subject, body) {
+  const text = "Subject: " + subject + "\n\n" + body;
+  navigator.clipboard.writeText(text).then(() => {
+    const btn = document.getElementById("ec-" + i);
+    btn.textContent = "Copied!";
+    btn.classList.add("copied");
+    setTimeout(() => { btn.textContent = "Copy Email"; btn.classList.remove("copied"); }, 2000);
+  });
+}
+
+function escJ(s) { return String(s||"").replace(/\\/g,"\\\\").replace(/`/g,"\\`").replace(/\$/g,"\\$"); }
 
 async function runPipeline() {
   const name = document.getElementById("company-name").value.trim();
@@ -712,31 +576,67 @@ async function runPipeline() {
 
   resetAll();
   document.getElementById("run-btn").disabled = true;
-  document.getElementById("run-btn").innerHTML = `<svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" style="animation:spin2 1s linear infinite"><path d="M21 12a9 9 0 1 1-6.219-8.56"/></svg> Running...`;
+  document.getElementById("run-btn").textContent = "Running...";
 
-  if (!document.getElementById("spin2-style")) {
-    const s = document.createElement("style");
-    s.id = "spin2-style";
-    s.textContent = "@keyframes spin2{to{transform:rotate(360deg)}}";
-    document.head.appendChild(s);
-  }
+  setStep(1, "active", "Searching...");
+  setStep(2, "", "Waiting...");
+  setStep(3, "", "Waiting...");
 
-  setStep(1,"running","Searching the web...");
   document.getElementById("output-area").innerHTML = `
     <div class="skeleton" style="height:80px;margin-bottom:1rem;"></div>
     <div class="skeleton" style="height:80px;margin-bottom:1rem;"></div>
     <div class="skeleton" style="height:120px;"></div>
-  `;
+    <div style="text-align:center;margin-top:1.5rem;">
+      <p style="color:var(--text2);font-size:13px;margin-bottom:8px;" id="status-msg">
+        Initializing pipeline...
+      </p>
+      <p style="color:var(--text3);font-size:11px;line-height:1.6;max-width:320px;margin:0 auto;">
+        Three agents run sequentially. Average time: 4-6 minutes.<br/>
+        Please keep this tab open.
+      </p>
+      <div style="margin-top:1rem;height:3px;background:var(--border);border-radius:2px;overflow:hidden;max-width:300px;margin:1rem auto 0;">
+        <div id="progress-bar" style="height:100%;background:var(--blue);width:0%;transition:width 2s ease;border-radius:2px;"></div>
+      </div>
+    </div>`;
 
   startTime = Date.now();
+  const statusMessages = [
+    [0,   "Initializing pipeline..."],
+    [10,  "Researching company on the web..."],
+    [30,  "Analyzing funding, product and AI signals..."],
+    [60,  "Research complete. Finding decision-makers..."],
+    [90,  "Querying Apollo.io for contacts..."],
+    [120, "Contacts identified. Drafting outreach emails..."],
+    [150, "Personalizing emails for each contact..."],
+    [200, "Almost there, finalizing output..."],
+    [260, "Taking longer than usual, still running..."],
+    [300, "Still working, Lyzr agents are thorough..."],
+  ];
   elapsedTimer = setInterval(() => {
     const s = Math.floor((Date.now() - startTime) / 1000);
-    document.getElementById("elapsed").textContent = `Elapsed: ${s}s`;
+    document.getElementById("elapsed").textContent = "Elapsed: " + s + "s";
+    const msgEl = document.getElementById("status-msg");
+    const barEl = document.getElementById("progress-bar");
+    if (msgEl) {
+      const match = [...statusMessages].reverse().find(([t]) => s >= t);
+      if (match) msgEl.textContent = match[1];
+    }
+    if (barEl) {
+      barEl.style.width = Math.min(95, (s / 360) * 100) + "%";
+    }
+    if (s > 55 && document.getElementById("step1").className.includes("active")) {
+      setStep(1, "done", "Complete");
+      setStep(2, "active", "Finding contacts...");
+    }
+    if (s > 110 && document.getElementById("step2").className.includes("active")) {
+      setStep(2, "done", "Complete");
+      setStep(3, "active", "Drafting emails...");
+    }
   }, 1000);
 
   try {
     const controller = new AbortController();
-    const timeout = setTimeout(() => controller.abort(), 240000);
+    const timeout = setTimeout(() => controller.abort(), 300000);
 
     const res = await fetch(PROXY_URL, {
       method: "POST",
@@ -753,31 +653,49 @@ async function runPipeline() {
     clearTimeout(timeout);
     clearInterval(elapsedTimer);
 
-    if (!res.ok) throw new Error("API returned status " + res.status);
+    const raw = await res.text();
+    console.log("RAW API RESPONSE:", raw);
 
-    const data = await res.json();
-    const reply = data.response || data.message || JSON.stringify(data);
+    if (!res.ok) {
+      throw new Error("API error " + res.status + ": " + raw.substring(0, 200));
+    }
 
-    setStep(2,"running","Finding contacts...");
-    setTimeout(() => setStep(2,"done","Complete"), 500);
-    setTimeout(() => setStep(3,"running","Drafting emails..."), 600);
-    setTimeout(() => {
-      setStep(3,"done","Complete");
-      renderOutput(reply);
-      document.getElementById("run-btn").disabled = false;
-      document.getElementById("run-btn").innerHTML = `<svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5"><polygon points="5 3 19 12 5 21 5 3"/></svg> Run Pipeline`;
-    }, 900);
+    let reply = "";
+    try {
+      const data = JSON.parse(raw);
+      // try every possible response field
+      reply = data.response || data.message || data.output || data.text ||
+              data.content || data.result || data.answer ||
+              (data.choices && data.choices[0] && data.choices[0].message && data.choices[0].message.content) ||
+              JSON.stringify(data, null, 2);
+    } catch(e) {
+      reply = raw;
+    }
+
+    if (!reply || reply.trim() === "") {
+      reply = "The agent returned an empty response. Raw API response:\n\n" + raw;
+    }
+
+    renderOutput(reply);
 
   } catch(err) {
     clearInterval(elapsedTimer);
-    setStep(1,"failed","Failed");
+    [1,2,3].forEach(n => {
+      if (document.getElementById("step" + n).className.includes("active")) {
+        setStep(n, "failed", "Failed");
+      }
+    });
     document.getElementById("output-area").innerHTML = `
       <div class="error-card">
-        <h3>Pipeline Failed</h3>
-        <p>${err.name === "AbortError" ? "The request timed out after 4 minutes. The Lyzr agent may be overloaded. Please try again." : "Error: " + escHtml(err.message)}</p>
-        <button class="retry-btn" onclick="runPipeline()">Retry Pipeline</button>
-      </div>
-    `;
+        <h3>Pipeline Error</h3>
+        <p>${err.name === "AbortError"
+          ? "Request timed out after 5 minutes. The Lyzr agent may be overloaded. Please try again."
+          : esc(err.message)}</p>
+        <button class="retry-btn" onclick="runPipeline()">Retry</button>
+        <button style="background:transparent;border:1px solid var(--border);color:var(--text2);
+          padding:10px 20px;border-radius:8px;font-size:13px;cursor:pointer;font-family:var(--font);"
+          onclick="resetAll()">Start Over</button>
+      </div>`;
     document.getElementById("run-btn").disabled = false;
     document.getElementById("run-btn").innerHTML = `<svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5"><polygon points="5 3 19 12 5 21 5 3"/></svg> Run Pipeline`;
   }
